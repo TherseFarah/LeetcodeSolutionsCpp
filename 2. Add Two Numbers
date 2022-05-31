@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+
+//Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    ListNode *solution;
+    ListNode **node=&solution;
+    int sum=0;
+    while(l1!= NULL || l2!= NULL||sum>0){
+        if(l1!= NULL){
+            sum+=l1->val;
+            l1=l1->next;
+        }
+        if(l2!= NULL){
+            sum+=l2->val;
+            l2=l2->next;
+        }
+        (*node)=new ListNode(sum%10);
+        sum/=10;
+        node=&((*node)->next);
+    }
+    return solution;
+}
+ListNode *addTwoNumbers(ListNode *pNode, ListNode *pNode1);
+
+int main() {
+    ListNode *list1 = new ListNode(2, (new ListNode(4 ,(new ListNode (3)))));
+    ListNode *list2 = new ListNode(5, (new ListNode(6 ,(new ListNode (4)))));
+    ListNode *solution = addTwoNumbers(list1, list2);
+    cout<<solution->val;
+    return 0;
+}
+
+/*05/31/2022 15:58	Accepted	46 ms	71.5 MB	cpp
+05/31/2022 15:57	Accepted	76 ms	71.3 MB	cpp
+Runtime: 46 ms, faster than 59.67% of C++ online submissions for Add Two Numbers.*/
