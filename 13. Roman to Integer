@@ -1,0 +1,91 @@
+#include <iostream>
+
+using namespace std;
+    int romanToInt(string s) {
+        int solution = 0;
+        while (!s.empty()) {
+            switch (s.at(s.size() - 1)) {
+                case 'I':
+                    solution += 1;
+                    break;
+                case 'V':
+                    if (s.size() >= 2) {
+                        if (s.at(s.size() - 2) == 'I') {
+                            solution += 4;
+                            s.pop_back();
+                        }
+                        else
+                            solution += 5;
+                    } else
+                        solution += 5;
+                    break;
+                case 'X':
+                    if (s.size() >= 2) {
+                        if (s.at(s.size() - 2) == 'I') {
+                            solution += 9;
+                            s.pop_back();
+                        }
+                        else
+                            solution += 10;
+                    } else
+                        solution += 10;
+                    break;
+                case 'L':
+                    if (s.size() >= 2) {
+                        if (s.at(s.size() - 2) == 'X') {
+                            solution += 40;
+                            s.pop_back();
+                        }
+                        else
+                            solution += 50;
+                    } else
+                        solution += 50;
+                    break;
+                case 'C':
+                    if (s.size() >= 2) {
+                        if (s.at(s.size() - 2) == 'X') {
+                            solution += 90;
+                            s.pop_back();
+                        }
+                        else
+                            solution += 100;
+                    } else
+                        solution += 100;
+                    break;
+                case 'D':
+                    if (s.size() >= 2) {
+                        if (s.at(s.size() - 2) == 'C') {
+                            solution += 400;
+                            s.pop_back();
+                        }
+                        else
+                            solution += 500;
+                    } else
+                        solution += 500;
+                    break;
+                case 'M':
+                    if (s.size() >= 2) {
+                        if (s.at(s.size() - 2) == 'C') {
+                            solution += 900;
+                            s.pop_back();
+                        }
+                        else
+                            solution += 1000;
+                    }else
+                        solution += 1000;
+                    break;
+            }
+            s.pop_back();
+        }
+        return solution;
+    }
+
+int main() {
+    cout << romanToInt("LVIII") << endl;
+    return 0;
+}
+
+
+/*Runtime: 0 ms, faster than 100.00% of C++ online submissions for Roman to Integer.
+Memory Usage: 6 MB, less than 62.36% of C++ online submissions for Roman to Integer.
+05/31/2022 17:52	Accepted	0 ms	6 MB	cpp*/
